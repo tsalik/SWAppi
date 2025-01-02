@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "blog.tsalikis.starwars.design"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 28

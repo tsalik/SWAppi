@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "StarWarsApp"
 include(":app")
 include(":design")
+include(":feature-characters")
