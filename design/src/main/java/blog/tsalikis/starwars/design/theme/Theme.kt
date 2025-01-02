@@ -1,4 +1,4 @@
-package blog.tsalikis.starwars.ui.theme
+package blog.tsalikis.starwars.design.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

@@ -1,4 +1,4 @@
-package blog.tsalikis.starwars.ui.theme
+package blog.tsalikis.starwars.design.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
