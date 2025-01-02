@@ -14,10 +14,11 @@ uiTooling = "1.7.6"
 hilt = "2.52"
 hiltNavigationCompose = "1.2.0"
 junit5 = "5.11.0"
-kotlinCoroutinesTest = "1.7.3"
+kotlinCoroutinesTest = "1.8.0"
 truth = "1.4.4"
 turbine = "1.0.0"
 mockitoKotlin = "5.4.0"
+apollo = "4.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,7 @@ kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coro
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+apollo = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -53,3 +55,4 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 android-library = { id = "com.android.library", version.ref = "agp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }

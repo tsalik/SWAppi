@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     id("kotlin-kapt")
+    alias(libs.plugins.apollo)
 }
 
 android {
@@ -42,6 +43,16 @@ android {
             unitTest.useJUnitPlatform() // explicitly use JUnit 5
         }
     }
+
+    apollo {
+        service("starwars") {
+            packageName = "blog.tsalikis.starwars.datasource.graphql"
+            introspection {
+                endpointUrl = "https://swapi-graphql.eskerda.vercel.app/"
+                schemaFile.set(file("src/main/graphql/schema.graphqls"))
+            }
+        }
+    }
 }
 
 dependencies {
@@ -57,6 +68,7 @@ dependencies {
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.apollo)
     implementation(project(":design"))
     testImplementation(libs.junit)
     testImplementation(libs.junit5)
