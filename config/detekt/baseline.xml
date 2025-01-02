@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>BlockCommentInitialStarAlignment:Theme.kt$/* Other default colors to override background = Color(0xFFFFFBFE), surface = Color(0xFFFFFBFE), onPrimary = Color.White, onSecondary = Color.White, onTertiary = Color.White, onBackground = Color(0xFF1C1B1F), onSurface = Color(0xFF1C1B1F), */</ID>
+    <ID>BlockCommentInitialStarAlignment:Type.kt$/* Other default text styles to override titleLarge = TextStyle( fontFamily = FontFamily.Default, fontWeight = FontWeight.Normal, fontSize = 22.sp, lineHeight = 28.sp, letterSpacing = 0.sp ), labelSmall = TextStyle( fontFamily = FontFamily.Default, fontWeight = FontWeight.Medium, fontSize = 11.sp, lineHeight = 16.sp, letterSpacing = 0.5.sp ) */</ID>
+    <ID>FinalNewline:Color.kt$blog.tsalikis.starwars.design.theme.Color.kt</ID>
+    <ID>FinalNewline:ExampleInstrumentedTest.kt$blog.tsalikis.starwars.ExampleInstrumentedTest.kt</ID>
+    <ID>FinalNewline:ExampleInstrumentedTest.kt$blog.tsalikis.starwars.design.ExampleInstrumentedTest.kt</ID>
+    <ID>FinalNewline:ExampleUnitTest.kt$blog.tsalikis.starwars.ExampleUnitTest.kt</ID>
+    <ID>FinalNewline:ExampleUnitTest.kt$blog.tsalikis.starwars.design.ExampleUnitTest.kt</ID>
+    <ID>FinalNewline:MainActivity.kt$blog.tsalikis.starwars.MainActivity.kt</ID>
+    <ID>FinalNewline:Theme.kt$blog.tsalikis.starwars.design.theme.Theme.kt</ID>
+    <ID>FinalNewline:Type.kt$blog.tsalikis.starwars.design.theme.Type.kt</ID>
+    <ID>FinalNewline:build.gradle.kts$.build.gradle.kts</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Composable fun Greeting(name: String, modifier: Modifier = Modifier)</ID>
+    <ID>FunctionNaming:MainActivity.kt$@Preview(showBackground = true) @Composable fun GreetingPreview()</ID>
+    <ID>FunctionNaming:Theme.kt$@Composable fun StarWarsAppTheme( darkTheme: Boolean = isSystemInDarkTheme(), // Dynamic color is available on Android 12+ dynamicColor: Boolean = true, content: @Composable () -&gt; Unit )</ID>
+    <ID>ImportOrdering:ExampleInstrumentedTest.kt$import androidx.test.platform.app.InstrumentationRegistry import androidx.test.ext.junit.runners.AndroidJUnit4 import org.junit.Test import org.junit.runner.RunWith import org.junit.Assert.*</ID>
+    <ID>ImportOrdering:ExampleUnitTest.kt$import org.junit.Test import org.junit.Assert.*</ID>
+    <ID>MagicNumber:Color.kt$0xFF625b71</ID>
+    <ID>MagicNumber:Color.kt$0xFF6650a4</ID>
+    <ID>MagicNumber:Color.kt$0xFF7D5260</ID>
+    <ID>MagicNumber:Color.kt$0xFFCCC2DC</ID>
+    <ID>MagicNumber:Color.kt$0xFFD0BCFF</ID>
+    <ID>MagicNumber:Color.kt$0xFFEFB8C8</ID>
+    <ID>NewLineAtEndOfFile:Color.kt$blog.tsalikis.starwars.design.theme.Color.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleInstrumentedTest.kt$blog.tsalikis.starwars.ExampleInstrumentedTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleInstrumentedTest.kt$blog.tsalikis.starwars.design.ExampleInstrumentedTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleUnitTest.kt$blog.tsalikis.starwars.ExampleUnitTest.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleUnitTest.kt$blog.tsalikis.starwars.design.ExampleUnitTest.kt</ID>
+    <ID>NewLineAtEndOfFile:MainActivity.kt$blog.tsalikis.starwars.MainActivity.kt</ID>
+    <ID>NewLineAtEndOfFile:Theme.kt$blog.tsalikis.starwars.design.theme.Theme.kt</ID>
+    <ID>NewLineAtEndOfFile:Type.kt$blog.tsalikis.starwars.design.theme.Type.kt</ID>
+    <ID>NewLineAtEndOfFile:build.gradle.kts$.build.gradle.kts</ID>
+    <ID>NoWildcardImports:ExampleInstrumentedTest.kt$import org.junit.Assert.*</ID>
+    <ID>NoWildcardImports:ExampleUnitTest.kt$import org.junit.Assert.*</ID>
+    <ID>WildcardImport:ExampleInstrumentedTest.kt$import org.junit.Assert.*</ID>
+    <ID>WildcardImport:ExampleUnitTest.kt$import org.junit.Assert.*</ID>
+  </CurrentIssues>
+</SmellBaseline>
