@@ -7,4 +7,5 @@
     <string name="error_generic_title">Something Went Wrong</string>
     <string name="error_generic_message">Something’s not quite right in the galaxy. Our droids are on it! Please try again in a moment.</string>
     <string name="retry">Retry</string>
+    <string name="characters_screen_title">People</string>
 </resources>
