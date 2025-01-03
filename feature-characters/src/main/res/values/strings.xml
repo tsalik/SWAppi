@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="height">Height: %1$d</string>
-    <string name="mass">Mass: %1$.2f</string>
+    <string name="height">Height: %1$dkg</string>
+    <string name="mass">Mass: %1$.2fcm</string>
     <string name="error_no_connection_title">Oops! No Internet</string>
     <string name="error_no_characters_found_title">These Are Not the Droids You’re Looking For</string>
     <string name="error_no_characters_found_message">We couldn’t find any characters in the galaxy. Double-check your search parameters or expand your search beyond the Outer Rim.</string>
@@ -14,7 +14,7 @@
     <string name="error_no_planet_found_message">The planet you’re looking for doesn’t seem to exist. Perhaps it has been destroyed by a Death Star, or the coordinates are incorrect.</string>
     <string name="character_details_cta">Click here to view homeword for %1$s</string>
     <string name="character_details_planet_name">Planet name: %1$s</string>
-    <string name="character_details_planet_diameter">Diameter: %1$s</string>
+    <string name="character_details_planet_diameter">Diameter: %1$skm</string>
     <string name="character_details_planet_climates">Climate: %1$s</string>
     <string name="character_details_planet_unknown">Unknown</string>
     <string name="back_button">Back</string>
