@@ -1,5 +1,6 @@
 package blog.tsalikis.starwars.characters.details
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -32,12 +33,12 @@ fun NavGraphBuilder.details() {
     ) {
         val viewModel = hiltViewModel<CharacterDetailsViewModel>()
         val state by viewModel.detailsFlow.collectAsStateWithLifecycle()
-        CharacterDetailsScreen(state)
+        CharacterDetailsScreen(state, onViewDetails = { viewModel.fetchDetails() })
     }
 }
 
 @Composable
-fun CharacterDetailsScreen(state: CharacterDetailsState) {
+fun CharacterDetailsScreen(state: CharacterDetailsState, onViewDetails: () -> Unit) {
     Scaffold(
         topBar = {
             Column {
@@ -57,15 +58,18 @@ fun CharacterDetailsScreen(state: CharacterDetailsState) {
                 .fillMaxSize()
         ) {
             when (state) {
-                is CharacterDetailsState.Idle -> CharacterDetails(state.name)
+                is CharacterDetailsState.Idle -> CharacterDetails(state.name, onViewDetails)
+                else -> Text(state.toString(), modifier = Modifier.fillMaxSize())
             }
         }
     }
 }
 
 @Composable
-private fun CharacterDetails(name: String) {
-    Column(modifier = Modifier.padding(top = 8.dp)) {
-        Text(stringResource(R.string.character_details_idle_message, name))
+private fun CharacterDetails(name: String, onViewDetails: () -> Unit) {
+    Column(modifier = Modifier.padding(top = 8.dp).fillMaxSize()) {
+        Text(
+            stringResource(R.string.character_details_idle_message, name),
+            modifier = Modifier.clickable { onViewDetails.invoke() })
     }
 }

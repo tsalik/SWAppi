@@ -34,7 +34,7 @@ class ApolloDataSource @Inject constructor(
         }
     }
 
-    override suspend fun personDetails(id: String): ContentError<StarWarsPlanet?> {
+    override suspend fun personDetails(id: String): ContentError<StarWarsPlanet> {
         if (connectivityCheck.isNetworkAvailable()) {
             val response = apolloClient.query(GetPersonQuery(id)).execute()
             return when {
