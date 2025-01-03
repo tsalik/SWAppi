@@ -2,6 +2,7 @@ package blog.tsalikis.starwars.characters.datasource
 
 import arrow.core.Either
 import blog.tsalikis.starwars.characters.domain.Errors
+import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import com.apollographql.apollo.ApolloClient
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
@@ -27,7 +28,7 @@ class ApolloDataSourceTest {
     }
 
     @Test
-    fun `should return the character names on network success`() = runTest {
+    fun `should return the characters who have non-null name on network success`() = runTest {
         whenever(connectivityCheck.isNetworkAvailable()).thenReturn(true)
         val mockResponse = MockResponse()
             .setResponseCode(200)
@@ -42,6 +43,9 @@ class ApolloDataSourceTest {
                         },
                         {
                           "name": "C-3PO"
+                        },
+                        {
+                           "height": 27
                         }
                       ]
                     }
@@ -53,7 +57,22 @@ class ApolloDataSourceTest {
 
         val result = apolloDataSource.allCharacters()
 
-        assertThat(result).isEqualTo(Either.Right(listOf("Luke Skywalker", "C-3PO")))
+        assertThat(result).isEqualTo(
+            Either.Right(
+                listOf(
+                    StarWarsCharacter(
+                        name = "Luke Skywalker",
+                        heightInCm = null,
+                        massInKg = null,
+                    ),
+                    StarWarsCharacter(
+                        name = "C-3PO",
+                        heightInCm = null,
+                        massInKg = null,
+                    )
+                )
+            )
+        )
     }
 
     @Test
@@ -79,7 +98,7 @@ class ApolloDataSourceTest {
     }
 
     @Test
-    fun `should return generic error on GraphQL error`() = runTest {
+    fun `should return generic error on json error`() = runTest {
         whenever(connectivityCheck.isNetworkAvailable()).thenReturn(true)
         val mockResponse = MockResponse()
             .setResponseCode(200)

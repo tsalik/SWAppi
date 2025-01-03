@@ -3,6 +3,7 @@ package blog.tsalikis.starwars.characters.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import blog.tsalikis.starwars.characters.datasource.StarWarsDataSource
+import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -44,6 +45,6 @@ class CharactersViewModel @Inject constructor(
 
 sealed interface CharactersState {
     data object Loading : CharactersState
-    data class Success(val names: List<String>) : CharactersState
+    data class Success(val names: List<StarWarsCharacter>) : CharactersState
     data class Error(val message: String) : CharactersState
 }

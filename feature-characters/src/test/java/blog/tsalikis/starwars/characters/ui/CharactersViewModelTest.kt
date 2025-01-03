@@ -3,6 +3,7 @@ package blog.tsalikis.starwars.characters.ui
 import app.cash.turbine.test
 import arrow.core.Either
 import blog.tsalikis.starwars.characters.datasource.StarWarsDataSource
+import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import blog.tsalikis.starwars.util.CoroutineTestExtension
 import blog.tsalikis.starwars.util.InstantExecutorExtension
 import com.google.common.truth.Truth.assertThat
@@ -32,8 +33,16 @@ class CharactersViewModelTest {
         whenever(starWarsDataSource.allCharacters()).thenReturn(
             Either.Right(
                 listOf(
-                    "Luke Skywalker",
-                    "C-3PO"
+                    StarWarsCharacter(
+                        name = "Luke Skywalker",
+                        heightInCm = 172,
+                        massInKg = 77.00
+                    ),
+                    StarWarsCharacter(
+                        name = "C-3PO",
+                        heightInCm = 167,
+                        massInKg = 75.00
+                    )
                 )
             )
         )
@@ -46,8 +55,16 @@ class CharactersViewModelTest {
             assertThat(awaitItem()).isEqualTo(
                 CharactersState.Success(
                     listOf(
-                        "Luke Skywalker",
-                        "C-3PO"
+                        StarWarsCharacter(
+                            name = "Luke Skywalker",
+                            heightInCm = 172,
+                            massInKg = 77.00
+                        ),
+                        StarWarsCharacter(
+                            name = "C-3PO",
+                            heightInCm = 167,
+                            massInKg = 75.00
+                        )
                     )
                 )
             )
