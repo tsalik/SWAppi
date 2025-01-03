@@ -51,7 +51,8 @@ class CharactersViewModel @Inject constructor(
                                     R.string.error_no_connection_title to
                                         R.string.error_no_connection_message
 
-                                Errors.NotFound -> R.string.error_no_characters_found_title to
+                                Errors.NotFound ->
+                                    R.string.error_no_characters_found_title to
                                         R.string.error_no_characters_found_message
                             }
                         CharactersState.Failure(title = title, message = message)

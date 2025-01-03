@@ -131,7 +131,7 @@ fun CharactersScreenSuccessPreview() {
             ),
             modifier = Modifier.fillMaxSize(),
             onRetry = {},
-            onDetails = { _, _ ->}
+            onDetails = { _, _ -> }
         )
     }
 }

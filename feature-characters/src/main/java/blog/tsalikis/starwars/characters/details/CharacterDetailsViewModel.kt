@@ -31,7 +31,7 @@ class CharacterDetailsViewModel @Inject constructor(
 
     fun fetchDetails() {
         viewModelScope.launch {
-            _state.update { CharacterDetailsState.Loading }
+            _state.update { CharacterDetailsState.Loading(name) }
             val result = apolloDataSource.personDetails(id)
             _state.update {
                 result.fold(
@@ -39,28 +39,35 @@ class CharacterDetailsViewModel @Inject constructor(
                         val (title, message) = when (error) {
                             Errors.Generic ->
                                 R.string.error_generic_title to
-                                        R.string.error_generic_message
+                                    R.string.error_generic_message
 
                             Errors.NoConnection ->
                                 R.string.error_no_connection_title to
-                                        R.string.error_no_connection_message
+                                    R.string.error_no_connection_message
 
-                            Errors.NotFound -> R.string.error_no_planet_found_title to
+                            Errors.NotFound ->
+                                R.string.error_no_planet_found_title to
                                     R.string.error_no_planet_found_message
                         }
                         CharacterDetailsState.Failure(title, message)
                     },
-                    { data -> CharacterDetailsState.Success(data) }
+                    { data -> CharacterDetailsState.Success(name, data) }
                 )
             }
+        }
+    }
+
+    fun onDismissDetails() {
+        viewModelScope.launch {
+            _state.update { CharacterDetailsState.Idle(name) }
         }
     }
 }
 
 sealed interface CharacterDetailsState {
     data class Idle(val name: String) : CharacterDetailsState
-    data object Loading : CharacterDetailsState
-    data class Success(val starWarsPlanet: StarWarsPlanet) : CharacterDetailsState
+    data class Loading(val name: String) : CharacterDetailsState
+    data class Success(val characterName: String, val starWarsPlanet: StarWarsPlanet) : CharacterDetailsState
     data class Failure(
         @StringRes val title: Int,
         @StringRes val message: Int

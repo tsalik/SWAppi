@@ -7,3 +7,4 @@ import androidx.compose.ui.graphics.Color
 val DeepBlue = Color(0xFF1E1266)
 val Black = Color(0xFF000000)
 val Blue = Color(0xFF1976D2)
+val Black80 = Color(0x80000000)

@@ -10,5 +10,5 @@ sealed interface Errors {
 
     data object Generic : Errors
 
-    data object NotFound: Errors
+    data object NotFound : Errors
 }

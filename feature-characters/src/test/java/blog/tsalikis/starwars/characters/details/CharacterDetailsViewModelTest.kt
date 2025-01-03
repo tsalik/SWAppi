@@ -54,9 +54,10 @@ class CharacterDetailsViewModelTest {
 
             viewModel.fetchDetails()
 
-            assertThat(awaitItem()).isEqualTo(CharacterDetailsState.Loading)
+            assertThat(awaitItem()).isEqualTo(CharacterDetailsState.Loading("Luke Skywalker"))
             assertThat(awaitItem()).isEqualTo(
                 CharacterDetailsState.Success(
+                    "Luke Skywalker",
                     StarWarsPlanet(
                         name = "Tatooine",
                         diameter = 10465,
@@ -80,7 +81,7 @@ class CharacterDetailsViewModelTest {
 
             viewModel.fetchDetails()
 
-            assertThat(awaitItem()).isEqualTo(CharacterDetailsState.Loading)
+            assertThat(awaitItem()).isEqualTo(CharacterDetailsState.Loading("Luke Skywalker"))
             assertThat(awaitItem()).isEqualTo(
                 CharacterDetailsState.Failure(
                     R.string.error_generic_title,
@@ -89,5 +90,4 @@ class CharacterDetailsViewModelTest {
             )
         }
     }
-
 }
