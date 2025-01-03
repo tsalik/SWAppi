@@ -2,7 +2,9 @@ package blog.tsalikis.starwars.characters.ui
 
 import app.cash.turbine.test
 import arrow.core.Either
+import blog.tsalikis.starwars.characters.R
 import blog.tsalikis.starwars.characters.datasource.StarWarsDataSource
+import blog.tsalikis.starwars.characters.domain.Errors
 import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import blog.tsalikis.starwars.util.CoroutineTestExtension
 import blog.tsalikis.starwars.util.InstantExecutorExtension
@@ -67,6 +69,42 @@ class CharactersViewModelTest {
                             massInKg = 75.00
                         )
                     ).toImmutableList()
+                )
+            )
+        }
+    }
+
+    @Test
+    fun `should show connectivity error when the failure is NoConnection`() = runTest {
+        whenever(starWarsDataSource.allCharacters()).thenReturn(Either.Left(Errors.NoConnection))
+
+        viewModel.charactersFlow.test {
+            awaitItem()
+
+            viewModel.fetchCharacters()
+
+            assertThat(awaitItem()).isEqualTo(
+                CharactersState.Failure(
+                    title = R.string.error_no_connection_title,
+                    message = R.string.error_no_connection_message
+                )
+            )
+        }
+    }
+
+    @Test
+    fun `should show generic error when the failure is Generic`() = runTest {
+        whenever(starWarsDataSource.allCharacters()).thenReturn(Either.Left(Errors.Generic))
+
+        viewModel.charactersFlow.test {
+            awaitItem()
+
+            viewModel.fetchCharacters()
+
+            assertThat(awaitItem()).isEqualTo(
+                CharactersState.Failure(
+                    title = R.string.error_generic_title,
+                    message = R.string.error_generic_message
                 )
             )
         }

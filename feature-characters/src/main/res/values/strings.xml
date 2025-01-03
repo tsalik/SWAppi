@@ -2,4 +2,9 @@
 <resources>
     <string name="height">Height: %1$d</string>
     <string name="mass">Mass: %1$.2f</string>
+    <string name="error_no_connection_title">Oops! No Internet</string>
+    <string name="error_no_connection_message">It seems we’ve drifted out of the network galaxy. Check your connection and let’s jump back to lightspeed!</string>
+    <string name="error_generic_title">Something Went Wrong</string>
+    <string name="error_generic_message">Something’s not quite right in the galaxy. Our droids are on it! Please try again in a moment.</string>
+    <string name="retry">Retry</string>
 </resources>

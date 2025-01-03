@@ -1,8 +1,11 @@
 package blog.tsalikis.starwars.characters.ui
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import blog.tsalikis.starwars.characters.R
 import blog.tsalikis.starwars.characters.datasource.StarWarsDataSource
+import blog.tsalikis.starwars.characters.domain.Errors
 import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -25,7 +28,11 @@ class CharactersViewModel @Inject constructor(
 
     private val _charactersFlow = MutableStateFlow<CharactersState>(CharactersState.Loading)
     val charactersFlow: StateFlow<CharactersState> = _charactersFlow.onStart { fetchCharacters() }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(ANR_THRESHOLD), CharactersState.Loading)
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(ANR_THRESHOLD),
+            CharactersState.Loading
+        )
 
     fun fetchCharacters() {
         viewModelScope.launch {
@@ -34,7 +41,12 @@ class CharactersViewModel @Inject constructor(
             _charactersFlow.update {
                 result.fold(
                     { error ->
-                        CharactersState.Error(error.toString())
+                        val (title, message) =
+                            when (error) {
+                                Errors.Generic -> R.string.error_generic_title to R.string.error_generic_message
+                                Errors.NoConnection -> R.string.error_no_connection_title to R.string.error_no_connection_message
+                            }
+                        CharactersState.Failure(title = title, message = message)
                     },
                     { data ->
                         CharactersState.Success(data.toImmutableList())
@@ -48,5 +60,5 @@ class CharactersViewModel @Inject constructor(
 sealed interface CharactersState {
     data object Loading : CharactersState
     data class Success(val characters: ImmutableList<StarWarsCharacter>) : CharactersState
-    data class Error(val message: String) : CharactersState
+    data class Failure(@StringRes val title: Int, @StringRes val message: Int) : CharactersState
 }
