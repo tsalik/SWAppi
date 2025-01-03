@@ -1,5 +1,6 @@
 package blog.tsalikis.starwars.characters.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,8 +23,13 @@ import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import blog.tsalikis.starwars.design.theme.StarWarsAppTheme
 
 @Composable
-fun CharacterItem(character: StarWarsCharacter, showDivider: Boolean, modifier: Modifier = Modifier) {
-    Surface(modifier = modifier) {
+fun CharacterItem(
+    character: StarWarsCharacter,
+    showDivider: Boolean,
+    modifier: Modifier = Modifier,
+    onDetails: () -> Unit
+) {
+    Surface(modifier = modifier.clickable { onDetails.invoke() }) {
         Column {
             Row(
                 modifier = Modifier.padding(8.dp),
@@ -63,7 +69,8 @@ fun CharactersItemPreview() {
             showDivider = true,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(8.dp),
+            onDetails = {}
         )
     }
 }
