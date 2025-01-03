@@ -39,13 +39,15 @@ class ApolloDataSourceTest {
                     "allPeople": {
                       "people": [
                         {
-                          "name": "Luke Skywalker"
+                          "name": "Luke Skywalker",
+                          "id": "cGVvcGxlOjE="
                         },
                         {
-                          "name": "C-3PO"
+                          "name": "C-3PO",
+                          "id": "cGVvcGxlOjI="
                         },
                         {
-                           "height": 27
+                          "id": "cGVvcGxlOjM="
                         }
                       ]
                     }
@@ -64,11 +66,13 @@ class ApolloDataSourceTest {
                         name = "Luke Skywalker",
                         heightInCm = null,
                         massInKg = null,
+                        id = "cGVvcGxlOjE="
                     ),
                     StarWarsCharacter(
                         name = "C-3PO",
                         heightInCm = null,
                         massInKg = null,
+                        id = "cGVvcGxlOjI="
                     )
                 )
             )

@@ -4,7 +4,7 @@ import arrow.core.Either
 import blog.tsalikis.starwars.characters.domain.ContentError
 import blog.tsalikis.starwars.characters.domain.Errors
 import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
-import blog.tsalikis.starwars.datasource.graphql.AllCharactersQuery
+import blog.tsalikis.starwars.datasource.graphql.GetPeopleQuery
 import com.apollographql.apollo.ApolloClient
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ class ApolloDataSource @Inject constructor(
 
     override suspend fun allCharacters(): ContentError<List<StarWarsCharacter>> {
         if (connectivityCheck.isNetworkAvailable()) {
-            val response = apolloClient.query(AllCharactersQuery()).execute()
+            val response = apolloClient.query(GetPeopleQuery()).execute()
             return when {
                 response.exception != null -> Either.Left(Errors.Generic)
                 response.hasErrors() -> Either.Left(Errors.Generic)
@@ -32,7 +32,7 @@ class ApolloDataSource @Inject constructor(
         }
     }
 
-    private fun List<AllCharactersQuery.Person>.mapToStarWarsPerson(): List<StarWarsCharacter> {
+    private fun List<GetPeopleQuery.Person>.mapToStarWarsPerson(): List<StarWarsCharacter> {
         return filterNot { personQuery ->
             personQuery.name == null
         }.map { personQuery ->
@@ -40,6 +40,7 @@ class ApolloDataSource @Inject constructor(
                 name = requireNotNull(personQuery.name),
                 heightInCm = personQuery.height,
                 massInKg = personQuery.mass,
+                id = personQuery.id,
             )
         }
     }

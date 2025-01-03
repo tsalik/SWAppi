@@ -1,6 +1,7 @@
-query AllCharacters {
+query getPeopleQuery {
     allPeople {
         people {
+            id
             name
             height
             mass

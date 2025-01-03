@@ -1,0 +1,9 @@
+query GetPersonQuery($id: ID!) {
+    person(id: $id) {
+        name
+        homeworld {
+            name
+            rotationPeriod
+        }
+    }
+}

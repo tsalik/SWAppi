@@ -118,12 +118,14 @@ fun CharactersScreenSuccessPreview() {
                     StarWarsCharacter(
                         name = "Luke Skywalker",
                         heightInCm = 172,
-                        massInKg = 77.00
+                        massInKg = 77.00,
+                        id = "cGVvcGxlOjE="
                     ),
                     StarWarsCharacter(
                         name = "C-3PO",
                         heightInCm = 167,
-                        massInKg = 75.00
+                        massInKg = 75.00,
+                        id = "cGVvcGxlOjI="
                     )
                 ).toImmutableList()
             ),

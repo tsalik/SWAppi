@@ -65,6 +65,7 @@ fun CharactersItemPreview() {
                 name = "Luke Skywalker",
                 heightInCm = 172,
                 massInKg = 77.00,
+                id = "cGVvcGxlOjE="
             ),
             showDivider = true,
             modifier = Modifier

@@ -4,4 +4,5 @@ data class StarWarsCharacter(
     val name: String,
     val heightInCm: Int?,
     val massInKg: Double?,
+    val id: String,
 )
