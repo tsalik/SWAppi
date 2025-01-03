@@ -69,6 +69,7 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.apollo)
+    implementation(libs.apollo.normalized.cache)
     implementation(libs.arrow.core)
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.androidx.navigation.compose)

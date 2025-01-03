@@ -13,6 +13,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -93,62 +94,7 @@ fun CharacterDetailsScreen(
                     Column {
                         CharacterDetails(state.characterName) { onViewDetails.invoke() }
                         val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-                        ModalBottomSheet(
-                            onDismissRequest = onDismissDetails,
-                            sheetState = sheetState,
-                            containerColor = Color.White,
-                            scrimColor = Black80
-                        ) {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                            ) {
-                                Text(
-                                    text = state.characterName,
-                                    style = MaterialTheme.typography.headlineMedium
-                                )
-                                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                    val planetName = if (state.starWarsPlanet.name != null) {
-                                        stringResource(
-                                            R.string.character_details_planet_name,
-                                            state.starWarsPlanet.name
-                                        )
-                                    } else {
-                                        stringResource(R.string.character_details_planet_unknown)
-                                    }
-                                    val planetDiameter =
-                                        if (state.starWarsPlanet.diameter != null) {
-                                            stringResource(
-                                                R.string.character_details_planet_diameter,
-                                                state.starWarsPlanet.diameter
-                                            )
-                                        } else {
-                                            stringResource(R.string.character_details_planet_unknown)
-                                        }
-                                    val climates = if (state.starWarsPlanet.climates.isNotEmpty()) {
-                                        stringResource(
-                                            R.string.character_details_planet_climates,
-                                            state.starWarsPlanet.climates.joinToString(separator = ",")
-                                        )
-                                    } else {
-                                        stringResource(R.string.character_details_planet_unknown)
-                                    }
-                                    Text(
-                                        text = planetName,
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
-                                    Text(
-                                        text = planetDiameter,
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
-                                    Text(
-                                        text = climates,
-                                        style = MaterialTheme.typography.bodyLarge
-                                    )
-                                }
-                            }
-                        }
+                        PlanetDetailsModal(onDismissDetails, sheetState, state)
                     }
                 }
 
@@ -156,6 +102,86 @@ fun CharacterDetailsScreen(
             }
         }
     }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun PlanetDetailsModal(
+    onDismissDetails: () -> Unit,
+    sheetState: SheetState,
+    state: CharacterDetailsState.Success
+) {
+    ModalBottomSheet(
+        onDismissRequest = onDismissDetails,
+        sheetState = sheetState,
+        containerColor = Color.White,
+        scrimColor = Black80
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = state.characterName,
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                PlanetName(state)
+                PlanetDiameter(state)
+                PlanetClimate(state)
+            }
+        }
+    }
+}
+
+@Composable
+private fun PlanetClimate(state: CharacterDetailsState.Success) {
+    val climates = if (state.starWarsPlanet.climates.isNotEmpty()) {
+        stringResource(
+            R.string.character_details_planet_climates,
+            state.starWarsPlanet.climates.joinToString(separator = ",")
+        )
+    } else {
+        stringResource(R.string.character_details_planet_unknown)
+    }
+    Text(
+        text = climates,
+        style = MaterialTheme.typography.bodyLarge
+    )
+}
+
+@Composable
+private fun PlanetDiameter(state: CharacterDetailsState.Success) {
+    val planetDiameter =
+        if (state.starWarsPlanet.diameter != null) {
+            stringResource(
+                R.string.character_details_planet_diameter,
+                state.starWarsPlanet.diameter
+            )
+        } else {
+            stringResource(R.string.character_details_planet_unknown)
+        }
+    Text(
+        text = planetDiameter,
+        style = MaterialTheme.typography.bodyLarge
+    )
+}
+
+@Composable
+private fun PlanetName(state: CharacterDetailsState.Success) {
+    val planetName = if (state.starWarsPlanet.name != null) {
+        stringResource(
+            R.string.character_details_planet_name,
+            state.starWarsPlanet.name
+        )
+    } else {
+        stringResource(R.string.character_details_planet_unknown)
+    }
+    Text(
+        text = planetName,
+        style = MaterialTheme.typography.bodyLarge
+    )
 }
 
 @Composable
