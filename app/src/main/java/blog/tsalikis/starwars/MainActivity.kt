@@ -4,11 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
-import blog.tsalikis.starwars.characters.ui.CharactersScreen
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import blog.tsalikis.starwars.characters.ui.CHARACTERS
+import blog.tsalikis.starwars.characters.ui.characters
 import blog.tsalikis.starwars.design.theme.StarWarsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,8 +18,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StarWarsAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CharactersScreen(Modifier.fillMaxSize().padding(innerPadding))
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = CHARACTERS) {
+                    characters()
                 }
             }
         }

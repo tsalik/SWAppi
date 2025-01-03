@@ -24,13 +24,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
 import blog.tsalikis.starwars.characters.R
+import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import blog.tsalikis.starwars.design.theme.StarWarsAppTheme
+import kotlinx.collections.immutable.toImmutableList
+
+const val CHARACTERS = "characters"
+
+fun NavGraphBuilder.characters() {
+    composable(CHARACTERS) {
+        val viewModel = hiltViewModel<CharactersViewModel>()
+        val state by viewModel.charactersFlow.collectAsStateWithLifecycle()
+        CharactersScreen(
+            state = state,
+            onRetry = { viewModel.fetchCharacters() }
+        )
+    }
+}
 
 @Composable
-fun CharactersScreen(modifier: Modifier = Modifier) {
-    val viewModel = hiltViewModel<CharactersViewModel>()
-    val state by viewModel.charactersFlow.collectAsStateWithLifecycle()
+fun CharactersScreen(state: CharactersState, modifier: Modifier = Modifier, onRetry: () -> Unit) {
     Scaffold(
         topBar = {
             Column {
@@ -46,12 +61,15 @@ fun CharactersScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(16.dp)
     ) { contentPadding ->
-        Box(modifier = Modifier.fillMaxSize().padding(contentPadding)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+        ) {
             when (state) {
                 is CharactersState.Failure -> {
-                    val error = state as CharactersState.Failure
-                    ErrorScreen(error.title, error.message, onRetry = {
-                        viewModel.fetchCharacters()
+                    ErrorScreen(state.title, state.message, onRetry = {
+                        onRetry.invoke()
                     })
                 }
 
@@ -62,17 +80,16 @@ fun CharactersScreen(modifier: Modifier = Modifier) {
                 )
 
                 is CharactersState.Success -> {
-                    val success = state as CharactersState.Success
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         itemsIndexed(
-                            items = success.characters,
+                            items = state.characters,
                             itemContent = { index, item ->
                                 CharacterItem(
                                     character = item,
-                                    showDivider = index < success.characters.lastIndex,
+                                    showDivider = index < state.characters.lastIndex,
                                     modifier = Modifier.fillMaxWidth()
                                 )
                             }
@@ -86,8 +103,25 @@ fun CharactersScreen(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun CharactersScreenPreview() {
+fun CharactersScreenSuccessPreview() {
     StarWarsAppTheme {
-        CharactersScreen(modifier = Modifier.fillMaxSize())
+        CharactersScreen(
+            state = CharactersState.Success(
+                listOf(
+                    StarWarsCharacter(
+                        name = "Luke Skywalker",
+                        heightInCm = 172,
+                        massInKg = 77.00
+                    ),
+                    StarWarsCharacter(
+                        name = "C-3PO",
+                        heightInCm = 167,
+                        massInKg = 75.00
+                    )
+                ).toImmutableList()
+            ),
+            modifier = Modifier.fillMaxSize(),
+            onRetry = {}
+        )
     }
 }

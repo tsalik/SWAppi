@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.apollo)
     implementation(libs.arrow.core)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.common.ktx)
     implementation(project(":design"))
     testImplementation(libs.junit)
     testImplementation(libs.junit5)

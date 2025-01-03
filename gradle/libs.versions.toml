@@ -22,6 +22,7 @@ apollo = "4.1.0"
 mockwebserver = "4.12.0"
 arrow = "1.2.4"
 kotlinxCollectionsImmutable = "0.3.8"
+navigationCompose = "2.8.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +54,8 @@ apollo = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "ap
 mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mockwebserver" }
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow"}
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
