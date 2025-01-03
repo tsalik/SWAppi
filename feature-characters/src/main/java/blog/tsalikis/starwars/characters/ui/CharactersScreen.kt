@@ -33,7 +33,7 @@ import kotlinx.collections.immutable.toImmutableList
 
 const val CHARACTERS = "characters"
 
-fun NavGraphBuilder.characters(onDetails: () -> Unit) {
+fun NavGraphBuilder.characters(onDetails: (String, String) -> Unit) {
     composable(CHARACTERS) {
         val viewModel = hiltViewModel<CharactersViewModel>()
         val state by viewModel.charactersFlow.collectAsStateWithLifecycle()
@@ -50,7 +50,7 @@ fun CharactersScreen(
     state: CharactersState,
     modifier: Modifier = Modifier,
     onRetry: () -> Unit,
-    onDetails: () -> Unit,
+    onDetails: (String, String) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -97,7 +97,7 @@ fun CharactersScreen(
                                     character = item,
                                     showDivider = index < state.characters.lastIndex,
                                     modifier = Modifier.fillMaxWidth(),
-                                    onDetails = onDetails
+                                    onDetails = { onDetails(item.id, item.name) }
                                 )
                             }
                         )
@@ -131,7 +131,7 @@ fun CharactersScreenSuccessPreview() {
             ),
             modifier = Modifier.fillMaxSize(),
             onRetry = {},
-            onDetails = {}
+            onDetails = { _, _ ->}
         )
     }
 }

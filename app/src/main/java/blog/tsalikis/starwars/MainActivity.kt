@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import blog.tsalikis.starwars.characters.details.CHARACTER_DETAILS
 import blog.tsalikis.starwars.characters.details.details
 import blog.tsalikis.starwars.characters.ui.CHARACTERS
 import blog.tsalikis.starwars.characters.ui.characters
@@ -22,8 +21,10 @@ class MainActivity : ComponentActivity() {
             StarWarsAppTheme {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = CHARACTERS) {
-                    characters(onDetails = {
-                        navController.navigate(CHARACTER_DETAILS)
+                    characters(onDetails = { id, name ->
+                        navController.navigate(
+                            "characterDetails/$id/$name",
+                        )
                     })
                     details()
                 }

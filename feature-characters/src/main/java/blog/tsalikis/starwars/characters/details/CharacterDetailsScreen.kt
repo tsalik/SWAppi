@@ -11,20 +11,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import blog.tsalikis.starwars.characters.R
 
-const val CHARACTER_DETAILS = "characterDetails"
+const val CHARACTER_DETAILS = "characterDetails/{id}/{name}"
 
 fun NavGraphBuilder.details() {
-    composable(CHARACTER_DETAILS) {
-        CharacterDetailsScreen()
+    composable(
+        route = CHARACTER_DETAILS,
+        arguments = listOf(
+            navArgument("id") { type = NavType.StringType },
+            navArgument("name") { type = NavType.StringType }
+        )
+    ) {
+        val viewModel = hiltViewModel<CharacterDetailsViewModel>()
+        CharacterDetailsScreen(viewModel.id, viewModel.name)
     }
 }
 
 @Composable
-fun CharacterDetailsScreen() {
+fun CharacterDetailsScreen(id: String, name: String) {
     Scaffold(
         topBar = {
             Column {
@@ -38,8 +48,12 @@ fun CharacterDetailsScreen() {
             .fillMaxSize()
             .padding(16.dp)
     ) { contentPadding ->
-        Surface(modifier = Modifier.padding(contentPadding).fillMaxSize()) {
-            Text("Click here to view homeword for Leia Organa")
+        Surface(
+            modifier = Modifier
+                .padding(contentPadding)
+                .fillMaxSize()
+        ) {
+            Text("Click here to view homeword for $name{$id}")
         }
     }
 }
