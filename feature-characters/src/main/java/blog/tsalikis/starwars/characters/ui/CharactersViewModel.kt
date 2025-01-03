@@ -43,8 +43,13 @@ class CharactersViewModel @Inject constructor(
                     { error ->
                         val (title, message) =
                             when (error) {
-                                Errors.Generic -> R.string.error_generic_title to R.string.error_generic_message
-                                Errors.NoConnection -> R.string.error_no_connection_title to R.string.error_no_connection_message
+                                Errors.Generic ->
+                                    R.string.error_generic_title to
+                                        R.string.error_generic_message
+
+                                Errors.NoConnection ->
+                                    R.string.error_no_connection_title to
+                                        R.string.error_no_connection_message
                             }
                         CharactersState.Failure(title = title, message = message)
                     },

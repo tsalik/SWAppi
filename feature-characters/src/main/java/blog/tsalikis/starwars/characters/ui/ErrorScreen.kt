@@ -53,8 +53,7 @@ fun ErrorScreen(
 }
 
 @Composable
-@Preview
-private fun ErrorScreenPreview() {
+@Preview fun ErrorScreenPreview() {
     StarWarsAppTheme {
         ErrorScreen(
             title = R.string.error_no_connection_title,

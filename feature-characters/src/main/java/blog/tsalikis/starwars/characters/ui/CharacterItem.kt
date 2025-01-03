@@ -6,9 +6,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,25 +22,30 @@ import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import blog.tsalikis.starwars.design.theme.StarWarsAppTheme
 
 @Composable
-fun CharacterItem(character: StarWarsCharacter, modifier: Modifier = Modifier) {
-    Card(modifier = modifier) {
-        Row(
-            modifier = Modifier.padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = character.name, style = MaterialTheme.typography.titleMedium)
-                if (character.heightInCm != null) {
-                    Text(stringResource(R.string.height, character.heightInCm))
+fun CharacterItem(character: StarWarsCharacter, showDivider: Boolean, modifier: Modifier = Modifier) {
+    Surface(modifier = modifier) {
+        Column {
+            Row(
+                modifier = Modifier.padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(text = character.name, style = MaterialTheme.typography.titleMedium)
+                    if (character.heightInCm != null) {
+                        Text(stringResource(R.string.height, character.heightInCm))
+                    }
+                    if (character.massInKg != null) {
+                        Text(stringResource(R.string.mass, character.massInKg))
+                    }
                 }
-                if (character.massInKg != null) {
-                    Text(stringResource(R.string.mass, character.massInKg))
-                }
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = null,
+                )
             }
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = null,
-            )
+            if (showDivider) {
+                HorizontalDivider(thickness = 1.dp)
+            }
         }
     }
 }
@@ -54,6 +60,7 @@ fun CharactersItemPreview() {
                 heightInCm = 172,
                 massInKg = 77.00,
             ),
+            showDivider = true,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
