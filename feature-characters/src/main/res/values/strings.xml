@@ -12,5 +12,9 @@
     <string name="characters_screen_title">People</string>
     <string name="error_no_planet_found_title">Lost in the Void of Space</string>
     <string name="error_no_planet_found_message">The planet you’re looking for doesn’t seem to exist. Perhaps it has been destroyed by a Death Star, or the coordinates are incorrect.</string>
-    <string name="character_details_idle_message">Click here to view homeword for %1$s</string>
+    <string name="character_details_cta">Click here to view homeword for %1$s</string>
+    <string name="character_details_planet_name">Planet name: %1$s</string>
+    <string name="character_details_planet_diameter">Diameter: %1$s</string>
+    <string name="character_details_planet_climates">Climate: %1$s</string>
+    <string name="character_details_planet_unknown">Unknown</string>
 </resources>

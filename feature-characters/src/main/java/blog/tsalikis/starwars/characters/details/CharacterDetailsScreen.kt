@@ -2,6 +2,7 @@ package blog.tsalikis.starwars.characters.details
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -103,8 +104,49 @@ fun CharacterDetailsScreen(
                                     .fillMaxWidth()
                                     .padding(16.dp)
                             ) {
-                                Text(text = state.characterName, style = MaterialTheme.typography.headlineMedium)
-                                Text(text = state.starWarsPlanet.toString(), style = MaterialTheme.typography.bodyLarge)
+                                Text(
+                                    text = state.characterName,
+                                    style = MaterialTheme.typography.headlineMedium
+                                )
+                                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    val planetName = if (state.starWarsPlanet.name != null) {
+                                        stringResource(
+                                            R.string.character_details_planet_name,
+                                            state.starWarsPlanet.name
+                                        )
+                                    } else {
+                                        stringResource(R.string.character_details_planet_unknown)
+                                    }
+                                    val planetDiameter =
+                                        if (state.starWarsPlanet.diameter != null) {
+                                            stringResource(
+                                                R.string.character_details_planet_diameter,
+                                                state.starWarsPlanet.diameter
+                                            )
+                                        } else {
+                                            stringResource(R.string.character_details_planet_unknown)
+                                        }
+                                    val climates = if (state.starWarsPlanet.climates.isNotEmpty()) {
+                                        stringResource(
+                                            R.string.character_details_planet_climates,
+                                            state.starWarsPlanet.climates.joinToString(separator = ",")
+                                        )
+                                    } else {
+                                        stringResource(R.string.character_details_planet_unknown)
+                                    }
+                                    Text(
+                                        text = planetName,
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                    Text(
+                                        text = planetDiameter,
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                    Text(
+                                        text = climates,
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                }
                             }
                         }
                     }
@@ -124,7 +166,7 @@ private fun CharacterDetails(name: String, onViewDetails: () -> Unit) {
             .fillMaxSize()
     ) {
         Text(
-            stringResource(R.string.character_details_idle_message, name),
+            stringResource(R.string.character_details_cta, name),
             modifier = Modifier.clickable { onViewDetails.invoke() }
         )
     }
