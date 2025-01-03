@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="height">Height: %1$d</string>
+    <string name="mass">Mass: %1$.2f</string>
+</resources>

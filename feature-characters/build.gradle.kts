@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.apollo)
     implementation(libs.arrow.core)
+    implementation(libs.kotlinx.collections.immutable)
     implementation(project(":design"))
     testImplementation(libs.junit)
     testImplementation(libs.junit5)

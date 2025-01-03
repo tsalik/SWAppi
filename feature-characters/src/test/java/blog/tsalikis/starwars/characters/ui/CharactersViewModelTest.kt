@@ -7,6 +7,7 @@ import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import blog.tsalikis.starwars.util.CoroutineTestExtension
 import blog.tsalikis.starwars.util.InstantExecutorExtension
 import com.google.common.truth.Truth.assertThat
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
@@ -65,7 +66,7 @@ class CharactersViewModelTest {
                             heightInCm = 167,
                             massInKg = 75.00
                         )
-                    )
+                    ).toImmutableList()
                 )
             )
         }

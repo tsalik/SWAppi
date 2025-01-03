@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import blog.tsalikis.starwars.characters.datasource.StarWarsDataSource
 import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -35,7 +37,7 @@ class CharactersViewModel @Inject constructor(
                         CharactersState.Error(error.toString())
                     },
                     { data ->
-                        CharactersState.Success(data)
+                        CharactersState.Success(data.toImmutableList())
                     }
                 )
             }
@@ -45,6 +47,6 @@ class CharactersViewModel @Inject constructor(
 
 sealed interface CharactersState {
     data object Loading : CharactersState
-    data class Success(val names: List<StarWarsCharacter>) : CharactersState
+    data class Success(val characters: ImmutableList<StarWarsCharacter>) : CharactersState
     data class Error(val message: String) : CharactersState
 }
