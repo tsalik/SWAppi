@@ -1,6 +1,7 @@
 package blog.tsalikis.starwars.characters.ui
 
 import app.cash.turbine.test
+import arrow.core.Either
 import blog.tsalikis.starwars.characters.datasource.StarWarsDataSource
 import blog.tsalikis.starwars.util.CoroutineTestExtension
 import blog.tsalikis.starwars.util.InstantExecutorExtension
@@ -29,9 +30,11 @@ class CharactersViewModelTest {
     @Test
     fun `should show the character's names when retrieving the data successfully`() = runTest {
         whenever(starWarsDataSource.allCharacters()).thenReturn(
-            listOf(
-                "Luke Skywalker",
-                "C-3PO"
+            Either.Right(
+                listOf(
+                    "Luke Skywalker",
+                    "C-3PO"
+                )
             )
         )
 
@@ -41,7 +44,7 @@ class CharactersViewModelTest {
             viewModel.fetchCharacters()
 
             assertThat(awaitItem()).isEqualTo(
-                CharactersState.Characters(
+                CharactersState.Success(
                     listOf(
                         "Luke Skywalker",
                         "C-3PO"

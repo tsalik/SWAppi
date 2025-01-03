@@ -26,9 +26,17 @@ class CharactersViewModel @Inject constructor(
 
     fun fetchCharacters() {
         viewModelScope.launch {
-            val data = starWarsDataSource.allCharacters()
+            _charactersFlow.update { CharactersState.Loading }
+            val result = starWarsDataSource.allCharacters()
             _charactersFlow.update {
-                CharactersState.Characters(data)
+                result.fold(
+                    { error ->
+                        CharactersState.Error(error.toString())
+                    },
+                    { data ->
+                        CharactersState.Success(data)
+                    }
+                )
             }
         }
     }
@@ -36,5 +44,6 @@ class CharactersViewModel @Inject constructor(
 
 sealed interface CharactersState {
     data object Loading : CharactersState
-    data class Characters(val names: List<String>) : CharactersState
+    data class Success(val names: List<String>) : CharactersState
+    data class Error(val message: String) : CharactersState
 }
