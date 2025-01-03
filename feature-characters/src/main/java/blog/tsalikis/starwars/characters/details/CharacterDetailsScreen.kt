@@ -1,15 +1,22 @@
 package blog.tsalikis.starwars.characters.details
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
@@ -59,9 +66,16 @@ fun CharacterDetailsScreen(
     onViewDetails: () -> Unit,
     onDismissDetails: () -> Unit,
 ) {
+    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
     Scaffold(
         topBar = {
-            Column {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    modifier = Modifier.clickable { backDispatcher?.onBackPressed() }
+                )
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     stringResource(R.string.characters_screen_title),
                     style = MaterialTheme.typography.headlineMedium,
@@ -193,6 +207,7 @@ private fun CharacterDetails(name: String, onViewDetails: () -> Unit) {
     ) {
         Text(
             stringResource(R.string.character_details_cta, name),
+            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.clickable { onViewDetails.invoke() }
         )
     }
