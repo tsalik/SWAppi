@@ -3,9 +3,14 @@
     <string name="height">Height: %1$d</string>
     <string name="mass">Mass: %1$.2f</string>
     <string name="error_no_connection_title">Oops! No Internet</string>
+    <string name="error_no_characters_found_title">These Are Not the Droids You’re Looking For</string>
+    <string name="error_no_characters_found_message">We couldn’t find any characters in the galaxy. Double-check your search parameters or expand your search beyond the Outer Rim.</string>
     <string name="error_no_connection_message">It seems we’ve drifted out of the network galaxy. Check your connection and let’s jump back to lightspeed!</string>
     <string name="error_generic_title">Something Went Wrong</string>
     <string name="error_generic_message">Something’s not quite right in the galaxy. Our droids are on it! Please try again in a moment.</string>
     <string name="retry">Retry</string>
     <string name="characters_screen_title">People</string>
+    <string name="error_no_planet_found_title">Lost in the Void of Space</string>
+    <string name="error_no_planet_found_message">The planet you’re looking for doesn’t seem to exist. Perhaps it has been destroyed by a Death Star, or the coordinates are incorrect.</string>
+    <string name="character_details_idle_message">Click here to view homeword for %1$s</string>
 </resources>

@@ -9,4 +9,6 @@ sealed interface Errors {
     data object NoConnection : Errors
 
     data object Generic : Errors
+
+    data object NotFound: Errors
 }

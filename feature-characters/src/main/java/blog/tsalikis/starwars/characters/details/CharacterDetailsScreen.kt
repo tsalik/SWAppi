@@ -8,10 +8,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -29,12 +31,13 @@ fun NavGraphBuilder.details() {
         )
     ) {
         val viewModel = hiltViewModel<CharacterDetailsViewModel>()
-        CharacterDetailsScreen(viewModel.id, viewModel.name)
+        val state by viewModel.detailsFlow.collectAsStateWithLifecycle()
+        CharacterDetailsScreen(state)
     }
 }
 
 @Composable
-fun CharacterDetailsScreen(id: String, name: String) {
+fun CharacterDetailsScreen(state: CharacterDetailsState) {
     Scaffold(
         topBar = {
             Column {
@@ -53,7 +56,16 @@ fun CharacterDetailsScreen(id: String, name: String) {
                 .padding(contentPadding)
                 .fillMaxSize()
         ) {
-            Text("Click here to view homeword for $name{$id}")
+            when (state) {
+                is CharacterDetailsState.Idle -> CharacterDetails(state.name)
+            }
         }
+    }
+}
+
+@Composable
+private fun CharacterDetails(name: String) {
+    Column(modifier = Modifier.padding(top = 8.dp)) {
+        Text(stringResource(R.string.character_details_idle_message, name))
     }
 }
