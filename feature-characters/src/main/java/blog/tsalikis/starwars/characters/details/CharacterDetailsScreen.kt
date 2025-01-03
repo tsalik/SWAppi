@@ -1,15 +1,17 @@
 package blog.tsalikis.starwars.characters.details
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -52,13 +54,19 @@ fun CharacterDetailsScreen(state: CharacterDetailsState, onViewDetails: () -> Un
             .fillMaxSize()
             .padding(16.dp)
     ) { contentPadding ->
-        Surface(
+        Box(
             modifier = Modifier
-                .padding(contentPadding)
                 .fillMaxSize()
+                .padding(contentPadding)
         ) {
             when (state) {
                 is CharacterDetailsState.Idle -> CharacterDetails(state.name, onViewDetails)
+                CharacterDetailsState.Loading -> CircularProgressIndicator(
+                    modifier = Modifier.align(
+                        Alignment.Center
+                    )
+                )
+
                 else -> Text(state.toString(), modifier = Modifier.fillMaxSize())
             }
         }
@@ -67,7 +75,11 @@ fun CharacterDetailsScreen(state: CharacterDetailsState, onViewDetails: () -> Un
 
 @Composable
 private fun CharacterDetails(name: String, onViewDetails: () -> Unit) {
-    Column(modifier = Modifier.padding(top = 8.dp).fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .padding(top = 8.dp)
+            .fillMaxSize()
+    ) {
         Text(
             stringResource(R.string.character_details_idle_message, name),
             modifier = Modifier.clickable { onViewDetails.invoke() })
