@@ -31,7 +31,10 @@ I used the **MVVM (Model-View-ViewModel)** pattern because:
 - **Jetpack Compose Navigation**: For managing screen transitions and passing arguments between composables.
 
 ### 4. **Fetching data**
-- **Do not paginate for MVP**: As I had not worked with GraphQL in the past, the most important was to focus on implementing all the requirements of the challenge. It was simpler to fetch all data and integrate with Apollo/familiarize myself with GraphQL. 
+- **Do not paginate for MVP**: As I had not worked with GraphQL in the past, the most important was to focus on implementing all the requirements of the challenge. It was simpler to fetch all data and integrate with Apollo/familiarize myself with GraphQL.
+
+### 5. **Project Layout**
+- **Multi-module features**: There are three different modules, the `app`, `design` and `feature-characters`. Splitting features in multiple modules allow for engineers to work simultaneously in parallel while minimising merge conflicts. An added benefit is potential build speed improvements.
 
 ---
 
