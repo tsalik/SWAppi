@@ -80,6 +80,31 @@ class ApolloDataSourceTest {
     }
 
     @Test
+    fun `should return NotFound when there are no characters from the API`() = runTest {
+        whenever(connectivityCheck.isNetworkAvailable()).thenReturn(true)
+        val mockResponse = MockResponse()
+            .setResponseCode(200)
+            .setBody(
+                """
+                {
+                  "data": {
+                    "allPeople": {
+                      "people": []
+                    }
+                  }
+                }
+                """.trimIndent()
+            )
+        mockWebServer.enqueue(mockResponse)
+
+        val result = apolloDataSource.allCharacters()
+
+        assertThat(result).isEqualTo(
+            Either.Left(Errors.NotFound)
+        )
+    }
+
+    @Test
     fun `should return generic error upon 500 HTTP error`() = runTest {
         whenever(connectivityCheck.isNetworkAvailable()).thenReturn(true)
         val mockResponse = MockResponse()

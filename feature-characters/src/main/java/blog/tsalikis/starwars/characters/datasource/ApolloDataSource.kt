@@ -23,9 +23,13 @@ class ApolloDataSource @Inject constructor(
             else -> {
                 val allPersons =
                     response.data?.allPeople?.people?.filterNotNull() ?: emptyList()
-                Either.Right(
-                    allPersons.mapToStarWarsPerson()
-                )
+                if (allPersons.isEmpty()) {
+                    Either.Left(Errors.NotFound)
+                } else {
+                    Either.Right(
+                        allPersons.mapToStarWarsPerson()
+                    )
+                }
             }
         }
     }
