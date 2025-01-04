@@ -29,6 +29,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import blog.tsalikis.starwars.characters.R
 import blog.tsalikis.starwars.characters.domain.StarWarsCharacter
+import blog.tsalikis.starwars.design.components.ErrorScreen
 import blog.tsalikis.starwars.design.theme.StarWarsAppTheme
 import kotlinx.collections.immutable.toImmutableList
 

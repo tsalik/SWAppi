@@ -37,6 +37,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import blog.tsalikis.starwars.characters.R
+import blog.tsalikis.starwars.design.components.ErrorScreen
 import blog.tsalikis.starwars.design.theme.Black80
 
 const val CHARACTER_DETAILS = "characterDetails/{id}/{name}"
@@ -112,7 +113,9 @@ fun CharacterDetailsScreen(
                     }
                 }
 
-                else -> Text(state.toString(), modifier = Modifier.fillMaxSize())
+                is CharacterDetailsState.Failure -> {
+                    ErrorScreen(state.title, state.message, onViewDetails)
+                }
             }
         }
     }
