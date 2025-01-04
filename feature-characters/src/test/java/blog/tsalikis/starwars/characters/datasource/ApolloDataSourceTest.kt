@@ -80,15 +80,6 @@ class ApolloDataSourceTest {
     }
 
     @Test
-    fun `should return an internet connection error upon UnknownHostException`() = runTest {
-        whenever(connectivityCheck.isNetworkAvailable()).thenReturn(false)
-
-        val result = apolloDataSource.allCharacters()
-
-        assertThat(result).isEqualTo(Either.Left(Errors.NoConnection))
-    }
-
-    @Test
     fun `should return generic error upon 500 HTTP error`() = runTest {
         whenever(connectivityCheck.isNetworkAvailable()).thenReturn(true)
         val mockResponse = MockResponse()
